@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace SelectionStatments
 {
@@ -204,6 +205,11 @@ namespace SelectionStatments
         /// <returns>The message with information about the type of integer.</returns>
         public static string GetTypeOfIntegerWithCascadedIfElse(object arg)
         {
+            if (arg == null)
+            {
+                throw new ArgumentNullException(nameof(arg));
+            }
+
             if (arg.GetType().Equals(typeof(sbyte)))
             {
                 return $"{arg} is sbyte.";
@@ -258,6 +264,11 @@ namespace SelectionStatments
         /// <returns>The message with information about the type of integer.</returns>
         public static string GetTypeOfIntegerWithSwitchStatement(object arg)
         {
+            if (arg == null)
+            {
+                throw new ArgumentNullException(nameof(arg));
+            }
+
             switch (Type.GetTypeCode(arg.GetType()))
             {
                 case TypeCode.SByte:
@@ -297,6 +308,11 @@ namespace SelectionStatments
         /// <returns>The message with information about the type of integer.</returns>
         public static string GetTypeOfIntegerWithSwitchExpression(object arg)
         {
+            if (arg == null)
+            {
+                throw new ArgumentNullException(nameof(arg));
+            }
+
             return Type.GetTypeCode(arg.GetType()) switch
             {
                 TypeCode.SByte => $"{arg} is sbyte.",
@@ -361,11 +377,11 @@ namespace SelectionStatments
 
             if (number < 0)
             {
-                temp = number.ToString().Length - 1;
+                temp = number.ToString(CultureInfo.CurrentCulture).Length - 1;
             }
             else
             {
-                temp = number.ToString().Length;
+                temp = number.ToString(CultureInfo.CurrentCulture).Length;
             }
 
             return (byte)temp;
@@ -382,14 +398,14 @@ namespace SelectionStatments
 
             if (number < 0)
             {
-                temp = number.ToString().Length - 1;
+                temp = number.ToString(CultureInfo.CurrentCulture).Length - 1;
             }
             else
             {
                 switch (number)
                 {
                     default:
-                        temp = number.ToString().Length;
+                        temp = number.ToString(CultureInfo.CurrentCulture).Length;
                         break;
                 }
             }
